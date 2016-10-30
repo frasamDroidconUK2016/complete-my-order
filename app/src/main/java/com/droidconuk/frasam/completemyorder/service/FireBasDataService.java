@@ -4,19 +4,11 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.droidconuk.frasam.completemyorder.model.Cart;
 import com.droidconuk.frasam.completemyorder.model.CartItem;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by Samuele on 10/29/16.
@@ -52,13 +44,11 @@ public class FireBasDataService extends IntentService {
             editor.commit();
         }
 
-        List<CartItem> items = new ArrayList<CartItem>(){{
-            add(new CartItem(productCode, 1));
-        }};
+        CartItem item = new CartItem(productCode, 1);
 
 
-        Cart cart = new Cart(DEFAULT_CART_CODE, new ArrayList<CartItem>(), items);
-        fireBaseDatabase.child("cart").setValue(cart);
+        Cart cart = new Cart(DEFAULT_CART_CODE, item);
+        fireBaseDatabase.child("cart").child(item.getProductCode()).setValue(item.getQuantity());
 
 
     }
