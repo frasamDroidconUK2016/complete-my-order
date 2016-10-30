@@ -18,6 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name="com.droidconuk.frasam.completemyorder.MyReceiver" >
+            <intent-filter>
+                <action android:name="com.droidconuk.frasam.completemyorder.MyReceiver.ACTION_NAME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.FireBasDataService"
+            android:exported="false"/>
     </application>
 
 </manifest>
